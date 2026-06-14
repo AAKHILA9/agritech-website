@@ -1,43 +1,61 @@
-import { useState } from "react";
-
-import product1 from "../../assets/images/product1.jpg";
-import product2 from "../../assets/images/product2.jpg";
-import product3 from "../../assets/images/product3.jpg";
-
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { API_URL } from "../../config";
 
 function Hero() {
-  const slides = [
-  {
-    image: product1,
-    title: "High Quality Agricultural Products",
-    description:
-      "Reliable fertilizer and crop nutrition solutions for modern farming.",
-  },
-  {
-    image: product2,
-    title: "Crop Growth & Protection Solutions",
-    description:
-      "Supporting healthy crops with advanced agricultural products.",
-  },
-  {
-    image: product3,
-    title: "Improving Yield Through Innovation",
-    description:
-      "Delivering sustainable farming solutions for long-term productivity.",
-  },
-  ];
+  const navigate = useNavigate();
 
+  const [slides, setSlides] = useState([]);
   const [currentSlide, setCurrentSlide] = useState(0);
 
+  useEffect(() => {
+    axios
+      .get(`${API_URL}/api/products/banners/`)
+      .then((response) => {
+        setSlides(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  useEffect(() => {
+    if (slides.length <= 1) return;
+
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) =>
+        prev === slides.length - 1 ? 0 : prev + 1
+      );
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [slides]);
+
   const nextSlide = () => {
-    setCurrentSlide((currentSlide + 1) % slides.length);
+    setCurrentSlide(
+      currentSlide === slides.length - 1 ? 0 : currentSlide + 1
+    );
   };
 
   const prevSlide = () => {
     setCurrentSlide(
-      (currentSlide - 1 + slides.length) % slides.length
+      currentSlide === 0 ? slides.length - 1 : currentSlide - 1
     );
   };
+
+  if (slides.length === 0) {
+    return (
+      <h2
+        style={{
+          textAlign: "center",
+          marginTop: "100px",
+        }}
+      >
+        Loading...
+      </h2>
+    );
+  }
 
   return (
     <section
@@ -84,16 +102,18 @@ function Hero() {
             marginBottom: "30px",
           }}
         >
-          {slides[currentSlide].description}
+          Premium Agricultural Solutions For Better Farming
         </p>
 
         <button
+          onClick={() => navigate("/products")}
           style={{
             padding: "12px 30px",
             border: "2px solid white",
             background: "transparent",
             color: "white",
             fontSize: "18px",
+            cursor: "pointer",
           }}
         >
           Explore Products
@@ -112,6 +132,7 @@ function Hero() {
           border: "none",
           color: "white",
           zIndex: 3,
+          cursor: "pointer",
         }}
       >
         ❮
@@ -129,6 +150,7 @@ function Hero() {
           border: "none",
           color: "white",
           zIndex: 3,
+          cursor: "pointer",
         }}
       >
         ❯

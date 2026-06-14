@@ -3,8 +3,11 @@ import pesticides from "../../../assets/images/pesticides.jpg";
 import bioProducts from "../../../assets/images/bioproducts.jpg";
 import growthPromoters from "../../../assets/images/growth.promototors.jpg";
 import categoryBg from "../../../assets/images/product-category-bg.jpg";
+import { useNavigate } from "react-router-dom";
 
 function Categories() {
+  const navigate = useNavigate();
+
   const categories = [
     {
       name: "Fertilizers",
@@ -38,7 +41,7 @@ function Categories() {
       <h2
         style={{
           textAlign: "center",
-          color:"#1b5e20",
+          color: "#1b5e20",
           fontSize: "42px",
           marginBottom: "80px",
           textShadow: "2px 2px 10px rgba(0,0,0,0.5)",
@@ -52,19 +55,22 @@ function Categories() {
           display: "grid",
           gridTemplateColumns: "1fr 1fr",
           gap: "100px 20px",
-          maxWidth:  "700px",
+          maxWidth: "700px",
           margin: "0 auto",
         }}
       >
         {categories.map((category, index) => (
           <div
             key={index}
+            onClick={() => navigate("/products")}
             style={{
               width: "320px",
               backgroundColor: "rgba(255,255,255,0.95)",
               borderRadius: "20px",
               overflow: "hidden",
               boxShadow: "0 8px 25px rgba(0,0,0,0.2)",
+              cursor: "pointer",
+              transition: "0.3s",
             }}
           >
             <img

@@ -25,3 +25,11 @@ def product_detail(request, id):
     serializer = ProductSerializer(product)
 
     return Response(serializer.data)
+
+from rest_framework import generics
+from .models import Banner
+from .serializers import BannerSerializer
+
+class BannerListView(generics.ListAPIView):
+    queryset = Banner.objects.all()
+    serializer_class = BannerSerializer

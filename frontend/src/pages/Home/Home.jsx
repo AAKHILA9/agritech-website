@@ -6,6 +6,7 @@ import WhyChooseUs from "../../components/WhyChooseUs/WhyChooseUs";
 import ContactForm from "../../components/ContactForm/ContactForm";
 import Hero from "../../components/Hero/Hero";
 import BannerSlider from "../../components/BannerSlider/BannerSlider";
+import InquiryPopup from "../../components/InquiryPopup/InquiryPopup";
 
 function Home() {
   return (
@@ -21,6 +22,7 @@ function Home() {
       <FeaturedProducts />
 
       <ContactForm />
+      <InquiryPopup />
 
       
     </>

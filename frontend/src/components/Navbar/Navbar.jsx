@@ -11,7 +11,7 @@ function Navbar() {
           color: "#1f1f1f",
           padding: "8px 50px",
           display: "flex",
-          justifyContent: "space-between",
+          justifyContent: "center",
           alignItems: "center",
           fontSize: "14px",
         }}
@@ -21,26 +21,12 @@ function Navbar() {
             display: "flex",
             gap: "25px",
             alignItems: "center",
+            flexWrap: "wrap",
           }}
         >
-          <span>📞 +91-7207186011</span>
-          <span>📞 +91-9502321125</span>
+          <span>📞 +91-8106887059</span>
           <span>✉ info@agritech.com</span>
         </div>
-
-        <select
-          style={{
-            background: "transparent",
-            border: "1px solid #999",
-            padding: "4px 10px",
-            fontSize: "14px",
-            cursor: "pointer",
-          }}
-        >
-          <option>English</option>
-          <option>Hindi</option>
-          <option>Telugu</option>
-        </select>
       </div>
 
       {/* Main Navbar */}

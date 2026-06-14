@@ -1,11 +1,13 @@
 import { API_URL } from "../../../config";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 import ProductCard from "../../../components/ProductCard/ProductCard";
 
 function FeaturedProducts() {
   const [products, setProducts] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -37,13 +39,20 @@ function FeaturedProducts() {
         }}
       >
         {products.map((product) => (
-          <ProductCard
+          <div
             key={product.id}
-            id={product.id}
-            image={`${API_URL}${product.image}`}
-            title={product.name}
-            description={product.description}
-          />
+            onClick={() => navigate(`/products/${product.id}`)}
+            style={{
+              cursor: "pointer",
+            }}
+          >
+            <ProductCard
+              id={product.id}
+              image={`${API_URL}${product.image}`}
+              title={product.name}
+              description={product.description}
+            />
+          </div>
         ))}
       </div>
     </section>

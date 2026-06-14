@@ -1,15 +1,24 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 function InquiryPopup() {
   const [showPopup, setShowPopup] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowPopup(true);
-    }, 60000);
+    const alreadyShown = localStorage.getItem("popupShown");
 
-    return () => clearTimeout(timer);
+    if (!alreadyShown) {
+      const timer = setTimeout(() => {
+        setShowPopup(true);
+      }, 60000);
+
+      return () => clearTimeout(timer);
+    }
   }, []);
+
+  const closePopup = () => {
+    setShowPopup(false);
+    localStorage.setItem("popupShown", "true");
+  };
 
   if (!showPopup) return null;
 
@@ -17,31 +26,51 @@ function InquiryPopup() {
     <div
       style={{
         position: "fixed",
-        inset: 0,
-        backgroundColor: "rgba(0,0,0,0.5)",
+        top: 0,
+        left: 0,
+        width: "100%",
+        height: "100%",
+        background: "rgba(0,0,0,0.5)",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        zIndex: 2000,
+        zIndex: 9999,
       }}
     >
       <div
         style={{
-          backgroundColor: "white",
+          width: "500px",
+          background: "white",
           padding: "30px",
           borderRadius: "10px",
-          width: "400px",
-          maxWidth: "90%",
+          position: "relative",
         }}
       >
-        <h2>Get in Touch</h2>
+        <button
+          onClick={closePopup}
+          style={{
+            position: "absolute",
+            right: "15px",
+            top: "10px",
+            border: "none",
+            background: "none",
+            fontSize: "22px",
+            cursor: "pointer",
+          }}
+        >
+          ×
+        </button>
+
+        <h2 style={{ textAlign: "center" }}>
+          Contact Us
+        </h2>
 
         <input
           type="text"
           placeholder="Name"
           style={{
             width: "100%",
-            padding: "10px",
+            padding: "12px",
             marginTop: "15px",
           }}
         />
@@ -51,43 +80,44 @@ function InquiryPopup() {
           placeholder="Email"
           style={{
             width: "100%",
-            padding: "10px",
+            padding: "12px",
             marginTop: "15px",
           }}
         />
 
         <input
-          type="tel"
+          type="text"
           placeholder="Mobile Number"
           style={{
             width: "100%",
-            padding: "10px",
+            padding: "12px",
+            marginTop: "15px",
+          }}
+        />
+
+        <textarea
+          rows="4"
+          placeholder="Message"
+          style={{
+            width: "100%",
+            padding: "12px",
             marginTop: "15px",
           }}
         />
 
         <button
+          onClick={closePopup}
           style={{
             width: "100%",
-            marginTop: "20px",
+            marginTop: "15px",
             padding: "12px",
-            backgroundColor: "green",
+            backgroundColor: "#4b6f2f",
             color: "white",
             border: "none",
+            cursor: "pointer",
           }}
         >
-          Submit
-        </button>
-
-        <button
-          onClick={() => setShowPopup(false)}
-          style={{
-            width: "100%",
-            marginTop: "10px",
-            padding: "12px",
-          }}
-        >
-          Close
+          Submit Inquiry
         </button>
       </div>
     </div>

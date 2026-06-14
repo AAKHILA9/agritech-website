@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function Footer() {
   return (
     <footer
@@ -28,19 +30,83 @@ function Footer() {
         {/* Quick Links */}
         <div>
           <h3>Quick Links</h3>
-          <p>Home</p>
-          <p>About</p>
-          <p>Products</p>
-          <p>Contact</p>
+
+          <p>
+            <Link
+              to="/"
+              style={{ color: "white", textDecoration: "none" }}
+            >
+              Home
+            </Link>
+          </p>
+
+          <p>
+            <Link
+              to="/about"
+              style={{ color: "white", textDecoration: "none" }}
+            >
+              About
+            </Link>
+          </p>
+
+          <p>
+            <Link
+              to="/products"
+              style={{ color: "white", textDecoration: "none" }}
+            >
+              Products
+            </Link>
+          </p>
+
+          <p>
+            <Link
+              to="/contact"
+              style={{ color: "white", textDecoration: "none" }}
+            >
+              Contact
+            </Link>
+          </p>
         </div>
 
         {/* Products */}
         <div>
           <h3>Products</h3>
-          <p>Fertilizers</p>
-          <p>Pesticides</p>
-          <p>Bio Products</p>
-          <p>Growth Promoters</p>
+
+          <p>
+            <Link
+              to="/products"
+              style={{ color: "white", textDecoration: "none" }}
+            >
+              Fertilizers
+            </Link>
+          </p>
+
+          <p>
+            <Link
+              to="/products"
+              style={{ color: "white", textDecoration: "none" }}
+            >
+              Pesticides
+            </Link>
+          </p>
+
+          <p>
+            <Link
+              to="/products"
+              style={{ color: "white", textDecoration: "none" }}
+            >
+              Bio Products
+            </Link>
+          </p>
+
+          <p>
+            <Link
+              to="/products"
+              style={{ color: "white", textDecoration: "none" }}
+            >
+              Growth Promoters
+            </Link>
+          </p>
         </div>
 
         {/* Contact */}
